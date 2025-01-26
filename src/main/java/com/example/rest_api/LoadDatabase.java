@@ -40,7 +40,6 @@ class LoadDatabase {
             } catch (Exception e) {
                 log.error("Error loading CSV data", e);
             }
-
         };
     }
 
@@ -61,9 +60,10 @@ class LoadDatabase {
         for (int i = 1; i < lines.size(); i++) {
             String[] values = lines.get(i).split(",");
 
-            String name = getFieldValue(headers, values, "\"Name\"");
+            String name = getFieldValue(headers, values, "Name");
 
-            String ratingValue = getFieldValue(headers, values, "\"Rating\"").replace("\"", "").trim();
+            // Parsing Rating
+            String ratingValue = getFieldValue(headers, values, "Rating").trim();
             double yelpRating = 0.0;
             if (!ratingValue.isEmpty()) {
                 try {
@@ -73,15 +73,25 @@ class LoadDatabase {
                 }
             }
 
+            // Parsing PriceRange
+            String priceValue = getFieldValue(headers, values, "PriceRange").trim();
+            Price price = null;
+            if (!priceValue.isEmpty()) {
+                try {
+                    price = Price.valueOf(priceValue);
+                } catch (IllegalArgumentException e) {
+                    System.out.println("Invalid price value: " + priceValue);
+                }
+            }
 
-            String price = getFieldValue(headers, values, "\"PriceRange\"");
-
+            // Create Restaurant object
             Restaurant restaurant = new Restaurant(name);
             restaurant.setPrice(price);
 
+            // Create and add Rating to Restaurant
             Rating rating = new Rating();
             rating.setRestaurant(restaurant);
-            rating.setRating((int)yelpRating);
+            rating.setRating((int) yelpRating);  // Assuming Rating is an integer (you can modify as needed)
             restaurant.getRatings().add(rating);
 
             restaurants.add(restaurant);
