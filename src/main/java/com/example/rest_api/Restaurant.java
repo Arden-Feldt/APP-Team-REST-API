@@ -1,14 +1,13 @@
 package com.example.rest_api;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "restaurants")
+@Table(name = "restaurant")
 public class Restaurant {
 
     @Id
@@ -17,14 +16,14 @@ public class Restaurant {
 
     private String name;
     private String location;
-    private Double rating;
-    private String cuisine;
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<Rating> ratings;
+
 
     Restaurant() {}
 
-    Restaurant(String name, Double rating) {
+    Restaurant(String name) {
         this.name = name;
-        this.rating = rating;
     }
 
     public Long getId() {
@@ -35,16 +34,26 @@ public class Restaurant {
         return name;
     }
 
-    public Double getRating() {
-        return rating;
+    public List<Rating> getRatings() {
+        if (ratings == null) {
+            ratings = new ArrayList<>();
+        }
+        return ratings;
+    }
+
+    public double getRating() {
+        if (ratings == null) {
+            ratings = new ArrayList<>();
+        }
+        int total = 0;
+        for (Rating rating : ratings){
+            total += rating.getRating();
+        }
+        return (double) total / ratings.size();
     }
 
     public String getLocation() {
         return location;
-    }
-
-    public String getCuisine() {
-        return cuisine;
     }
 
     public void setId(Long id) {
@@ -55,17 +64,14 @@ public class Restaurant {
         this.name = name;
     }
 
-    public void setRating(Double rating) {
-        this.rating = rating;
+    public void setRatings(List<Rating> ratings) {
+        this.ratings = ratings;
     }
 
     public void setLocation(String location) {
         this.location = location;
     }
 
-    public void setCuisine(String cuisine) {
-        this.cuisine = cuisine;
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -82,13 +88,13 @@ public class Restaurant {
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.id, this.name, this.rating);
+        return Objects.hash(this.id, this.name, this.ratings);
     }
 
     @Override
     public String toString() {
         // TODO: get return avg of rating
-        return "Restaurant{" + "id=" + this.id + ", name='" + this.name + '\'' + ", rating='" + this.rating + '\'' + '}';
+        return "Restaurant{" + "id=" + this.id + ", name='" + this.name + '\'' + ", rating='" + this.ratings + '\'' + '}';
     }
 
 }

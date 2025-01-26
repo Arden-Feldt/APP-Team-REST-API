@@ -15,8 +15,15 @@ class LoadDatabase {
     CommandLineRunner initDatabase(RestaurantRepository repository) {
 
         return args -> {
-            log.info("Preloading " + repository.save(new Restaurant("Root Cellar", 1.0)));
-            log.info("Preloading " + repository.save(new Restaurant("Alfredos", 5.0)));
+            Restaurant rootCellar = new Restaurant("Root Cellar");
+            Rating rating = new Rating();
+            rating.setRestaurant(rootCellar);
+            rating.setRating(1);
+            rootCellar.getRatings().add(rating);
+            repository.save(rootCellar);
+
+            log.info("Preloading " + rootCellar.getName());
+            log.info("Preloading " + repository.save(new Restaurant("Alfredos")));
         };
     }
 }
