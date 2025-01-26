@@ -1,5 +1,6 @@
 package com.example.rest_api;
 
+import com.example.rest_api.exceptions.RestaurantAlreadyExistsException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -81,6 +83,69 @@ public class RestaurantController {
         repository.save(restaurant);
     }
 
-    // Price Related Things $_$
+    @PostMapping("/restaurant/name/{name}")
+    void addRestaurant(@PathVariable String name) {
+        log.info("new restaurant name : {}", name);
+
+        for (Restaurant restList : repository.findAll()) {
+            if (name.equals(restList.getName())){
+                throw new RestaurantAlreadyExistsException(name);
+            }
+        }
+
+
+        Restaurant restaurant = new Restaurant(name);
+
+        repository.save(restaurant);
+    }
+
+    @GetMapping("/restaurant/{id}/rating")
+    Double getRestaurantRating(@PathVariable Long id) {
+        Restaurant restaurant = repository.findById(id)
+                .orElseThrow(() -> new RestaurantNotFoundException(id));
+
+        return restaurant.getRating();
+    }
+
+    @GetMapping("/restaurant/{id}/ratings")
+    List<Rating> getRestaurantRatings(@PathVariable Long id) {
+        Restaurant restaurant = repository.findById(id)
+                .orElseThrow(() -> new RestaurantNotFoundException(id));
+
+        return restaurant.getRatings();
+    }
+
+    // Price related stuff $_$
+
+    @PostMapping("/restaurant/{id}/price/{price}")
+    void addPrice(@PathVariable Long id, @PathVariable Price price) {
+        log.info("id : {}, price : {}", id, price);
+
+        Restaurant restaurant =  repository.findById(id)
+                .orElseThrow(() -> new RestaurantNotFoundException(id));
+
+        restaurant.setPrice(price);
+        repository.save(restaurant);
+    }
+
+    @GetMapping("/restaurant/{id}/price")
+    String getRestaurantPrice(@PathVariable Long id) {
+        Restaurant restaurant = repository.findById(id)
+                .orElseThrow(() -> new RestaurantNotFoundException(id));
+        return restaurant.getPrice();
+    }
+
+    @GetMapping("/price/{price}")
+    List<Restaurant> getRestaurantByPrice(@PathVariable Price price) {
+        List<Restaurant> priceList = new ArrayList<>();
+
+        for (Restaurant restaurant : repository.findAll()) {
+            if (restaurant.getPrice().equals(price.toString())){
+                priceList.add(restaurant);
+            }
+        }
+
+        return priceList;
+    }
 
 }
