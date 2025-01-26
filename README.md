@@ -39,6 +39,11 @@ RESTful API endpoints, streamline API development, and ensure the functionality 
 development.
 
 ---
+
+## Restaurant Endpoint API Documentation
+Find all API endpoint documentation in API.md.
+
+---
 ## Run and Test API
 To start the API up you've got a few options. Working inside an IDE, you can just run RestaurantApplication. If that's 
 not your speed take to the terminal and let Maven and Spring do the heavy lifting.
