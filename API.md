@@ -85,6 +85,7 @@
 
 **Response:**
 - **200 OK:** Rating added.
+- **404 Not Found:** Restaurant not found.
 
 ---
 
