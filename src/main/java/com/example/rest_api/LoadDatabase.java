@@ -21,7 +21,7 @@ class LoadDatabase {
         return args -> {
 
             // read in web scraped yelp data
-            String csvFilePath = "D:\\rest-api\\src\\main\\java\\com\\example\\rest_api\\YelpData\\results.csv";
+            String csvFilePath = "D:\\rest-api\\src\\main\\resources\\YelpData\\results.csv";
             try {
                 List<Restaurant> restaurants = parseCsv(csvFilePath);
                 for (Restaurant restaurant : restaurants) {
