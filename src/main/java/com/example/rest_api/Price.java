@@ -1,5 +1,6 @@
 package com.example.rest_api;
 
+// Price Enum set up to reflect Yelp pricing system
 public enum Price {
     $, $$, $$$;
 

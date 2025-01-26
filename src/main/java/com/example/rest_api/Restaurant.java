@@ -85,9 +85,6 @@ public class Restaurant {
             return false;
         Restaurant restaurant = (Restaurant) o;
         return Objects.equals(this.id, restaurant.id) && Objects.equals(this.name, restaurant.name);
-                // TODO: Check if impl is for instances of rating or instances of restaurant
-
-                // && Objects.equals(this.rating, restaurant.rating);
     }
 
     @Override
@@ -97,7 +94,6 @@ public class Restaurant {
 
     @Override
     public String toString() {
-        // TODO: get return avg of rating
         return "Restaurant{" + "id=" + this.id + ", name='" + this.name + '\'' + ", rating='" + this.ratings + '\'' + '}';
     }
 

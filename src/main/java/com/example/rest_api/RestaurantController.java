@@ -116,8 +116,7 @@ public class RestaurantController {
         return restaurant.getRatings();
     }
 
-    // Price related stuff $_$
-
+    // Price related stuff $_$ from here on out
     @PostMapping("/restaurant/{id}/price/{price}")
     void addPrice(@PathVariable Long id, @PathVariable Price price) {
         log.info("id : {}, price : {}", id, price);

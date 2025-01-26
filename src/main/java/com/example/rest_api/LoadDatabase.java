@@ -20,18 +20,8 @@ class LoadDatabase {
 
         return args -> {
 
+            // read in web scraped yelp data
             String csvFilePath = "D:\\rest-api\\src\\main\\java\\com\\example\\rest_api\\YelpData\\results.csv";
-
-            Restaurant rootCellar = new Restaurant("Root Cellar");
-            Rating rating = new Rating();
-            rating.setRestaurant(rootCellar);
-            rating.setRating(1);
-            rootCellar.getRatings().add(rating);
-            repository.save(rootCellar);
-
-            log.info("Preloading " + rootCellar.getName());
-            log.info("Preloading " + repository.save(new Restaurant("Alfredos")));
-
             try {
                 List<Restaurant> restaurants = parseCsv(csvFilePath);
                 for (Restaurant restaurant : restaurants) {
@@ -45,18 +35,10 @@ class LoadDatabase {
 
     private List<Restaurant> parseCsv(String filePath) throws Exception {
         List<Restaurant> restaurants = new ArrayList<>();
-
-        // Read all lines from the CSV file
         List<String> lines = Files.readAllLines(Paths.get(filePath));
-
-        if (lines.isEmpty()) {
-            throw new IllegalArgumentException("CSV file is empty");
-        }
 
         // Extract the header and parse rows
         String header = lines.get(0);
-        // TODO: Remove sout
-        System.out.println(header);
         String[] headers = header.split(",");
 
         for (int i = 1; i < lines.size(); i++) {
@@ -93,7 +75,7 @@ class LoadDatabase {
             // Create and add Rating to Restaurant
             Rating rating = new Rating();
             rating.setRestaurant(restaurant);
-            rating.setRating((int) yelpRating);  // Assuming Rating is an integer (you can modify as needed)
+            rating.setRating((int) yelpRating);
             restaurant.getRatings().add(rating);
 
             restaurants.add(restaurant);
