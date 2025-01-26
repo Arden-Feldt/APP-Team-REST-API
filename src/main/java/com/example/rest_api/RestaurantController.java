@@ -58,13 +58,15 @@ public class RestaurantController {
                     restaurant.setRatings(newRestaurant.getRatings());
                     return repository.save(restaurant);
                 })
-                .orElseGet(() -> {
-                    return repository.save(newRestaurant);
-                });
+                .orElseThrow(() -> new RestaurantNotFoundException(id));
     }
 
     @DeleteMapping("/restaurant/{id}")
     void deleteRestaurant(@PathVariable Long id) {
+
+        Restaurant restaurant = repository.findById(id)
+                .orElseThrow(() -> new RestaurantNotFoundException(id));
+
         repository.deleteById(id);
     }
 
