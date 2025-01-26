@@ -19,6 +19,7 @@ After some research Spring was the clear choice for framework. Spring is the ind
 REST APIs and web services in Java. Java is my bread and butter and made this choice a simple one. It's ability to
 autoconfigure application components, reducing boilerplate configuration was critical as I worked through this project 
 with limited time. 
+
 ### [Maven](https://maven.apache.org/)
 Maven provided easy dependency management and the ability to extend my work and add new 
 features.
@@ -32,9 +33,11 @@ limited my data to the top 100 food selling establishments within a short drivin
 Yelp.
 
 ### [Postman](https://www.postman.com/)
+
 Popular in industry, Postman was the clear choice for me to test and interact with my 
 RESTful API endpoints, streamline API development, and ensure the functionality of HTTP requests and responses during 
 development.
+
 ---
 ## Run and Test API
 To start the API up you've got a few options. Working inside an IDE, you can just run RestaurantApplication. If that's 
