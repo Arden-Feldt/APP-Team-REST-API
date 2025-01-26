@@ -20,7 +20,7 @@ REST APIs and web services in Java. Java is my bread and butter and made this ch
 autoconfigure application components, reducing boilerplate configuration was critical as I worked through this project 
 with limited time. 
 ### [Maven](https://maven.apache.org/)
-Maven provided easy dependencies management and the ability to extend my work and add new 
+Maven provided easy dependency management and the ability to extend my work and add new 
 features.
 
 ### [Yelp](https://www.yelp.com/) and [Yelp Scraper](https://chromewebstore.google.com/detail/yelp-scraper/cbmhmapejkobbbmhdlpjmiljbfgnfknc?hl=en)
