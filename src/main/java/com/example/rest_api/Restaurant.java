@@ -15,7 +15,8 @@ public class Restaurant {
     private Long id;
 
     private String name;
-    private String location;
+    @Enumerated(EnumType.STRING)
+    private Price price;
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Rating> ratings;
 
@@ -52,8 +53,11 @@ public class Restaurant {
         return (double) total / ratings.size();
     }
 
-    public String getLocation() {
-        return location;
+    public String getPrice() {
+        if (this.price == null){
+            return "";
+        }
+        return price.toString();
     }
 
     public void setId(Long id) {
@@ -68,8 +72,8 @@ public class Restaurant {
         this.ratings = ratings;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
+    public void setPrice(Price price) {
+        this.price = price;
     }
 
 
