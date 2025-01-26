@@ -1,7 +1,7 @@
-package com.example.rest_api;
+package com.example.rest_api.exceptions;
 
 public class RestaurantNotFoundException extends RuntimeException {
-    RestaurantNotFoundException(Long id) {
+    public RestaurantNotFoundException(Long id) {
         super("Could not find restaurant " + id);
     }
 }

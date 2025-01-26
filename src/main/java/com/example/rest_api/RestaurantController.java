@@ -1,5 +1,7 @@
 package com.example.rest_api;
 
+import com.example.rest_api.exceptions.RestaurantAlreadyExistsException;
+import com.example.rest_api.exceptions.RestaurantNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -11,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.Optional;
 
 
 @RestController
@@ -79,5 +80,37 @@ public class RestaurantController {
 
         restaurant.getRatings().add(newRating);
         repository.save(restaurant);
+    }
+
+    @PostMapping("/restaurant/name/{name}")
+    void addRestaurant(@PathVariable String name) {
+        log.info("new restaurant name : {}", name);
+
+        for (Restaurant restList : repository.findAll()) {
+            if (name.equals(restList.getName())){
+                throw new RestaurantAlreadyExistsException(name);
+            }
+        }
+
+
+        Restaurant restaurant = new Restaurant(name);
+
+        repository.save(restaurant);
+    }
+
+    @GetMapping("/restaurant/{id}/rating")
+    Double getRestaurantRating(@PathVariable Long id) {
+        Restaurant restaurant = repository.findById(id)
+                .orElseThrow(() -> new RestaurantNotFoundException(id));
+
+        return restaurant.getRating();
+    }
+
+    @GetMapping("/restaurant/{id}/ratings")
+    List<Rating> getRestaurantRatings(@PathVariable Long id) {
+        Restaurant restaurant = repository.findById(id)
+                .orElseThrow(() -> new RestaurantNotFoundException(id));
+
+        return restaurant.getRatings();
     }
 }
