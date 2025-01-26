@@ -17,7 +17,7 @@ class ExceptionAdvice {
 
     // TODO: Check this works!
     @ExceptionHandler(RestaurantAlreadyExistsException.class)
-    @ResponseStatus(HttpStatus.ALREADY_REPORTED)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     String resstaurantAlreadyExistsHandler(RestaurantAlreadyExistsException ex) {
         return ex.getMessage();
     }

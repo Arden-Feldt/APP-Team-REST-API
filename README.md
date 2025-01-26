@@ -40,7 +40,8 @@
 **Description:** Retrieves a restaurant by its ID.  
 **Path Variables:**
 - **id:** Long (Restaurant ID)  
-  **Response:**
+
+**Response:**
 - **200 OK:** Restaurant object.
 - **404 Not Found:** Restaurant not found.
 
@@ -59,7 +60,7 @@
   "ratings": "array",
   "price": "string"
 }
-```  
+```
 **Response:**
 - **200 OK:** Updated Restaurant object.
 - **201 Created:** New Restaurant object.
@@ -72,7 +73,8 @@
 **Description:** Deletes a restaurant by its ID.  
 **Path Variables:**
 - **id:** Long (Restaurant ID)  
-  **Response:**
+
+**Response:**
 - **204 No Content**
 
 ---
@@ -84,7 +86,8 @@
 **Path Variables:**
 - **id:** Long (Restaurant ID)
 - **rating:** Integer (Rating value)  
-  **Response:**
+
+**Response:**
 - **200 OK:** Rating added.
 
 ---
@@ -95,7 +98,8 @@
 **Description:** Adds a new restaurant by name if it doesn't already exist.  
 **Path Variables:**
 - **name:** String (Restaurant name)  
-  **Response:**
+
+**Response:**
 - **200 OK:** Restaurant added.
 - **400 Bad Request:** Restaurant already exists.
 
@@ -107,7 +111,8 @@
 **Description:** Retrieves the average rating of a restaurant.  
 **Path Variables:**
 - **id:** Long (Restaurant ID)  
-  **Response:**
+
+**Response:**
 - **200 OK:** Average rating (Double).
 
 ---
@@ -118,7 +123,8 @@
 **Description:** Retrieves all ratings for a restaurant.  
 **Path Variables:**
 - **id:** Long (Restaurant ID)  
-  **Response:**
+
+**Response:**
 - **200 OK:** Array of Rating objects.
 
 ---
@@ -130,7 +136,8 @@
 **Path Variables:**
 - **id:** Long (Restaurant ID)
 - **price:** String (Price value)  
-  **Response:**
+
+**Response:**
 - **200 OK:** Price updated.
 
 ---
@@ -141,7 +148,8 @@
 **Description:** Retrieves the price of a restaurant.  
 **Path Variables:**
 - **id:** Long (Restaurant ID)  
-  **Response:**
+  
+**Response:**
 - **200 OK:** Price (String).
 
 ---
@@ -152,5 +160,6 @@
 **Description:** Retrieves restaurants matching the specified price.  
 **Path Variables:**
 - **price:** String (Price value)  
-  **Response:**
+  
+**Response:**
 - **200 OK:** Array of Restaurant objects.
