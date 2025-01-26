@@ -41,7 +41,7 @@ development.
 ---
 
 ## Restaurant Endpoint API Documentation
-Find all API endpoint documentation in API.md.
+Find all API endpoint documentation in [API.md](https://github.com/Arden-Feldt/APP-Team-REST-API/blob/95b8bb6c4287dc687d5d8bd258b0152620fd3b6e/API.md).
 
 ---
 ## Run and Test API
