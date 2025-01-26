@@ -1,6 +1,7 @@
 package com.example.rest_api;
 
 import com.example.rest_api.exceptions.RestaurantAlreadyExistsException;
+import com.example.rest_api.exceptions.RestaurantNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -72,7 +73,7 @@ public class RestaurantController {
     void addRating(@PathVariable Long id, @PathVariable int rating) {
         log.info("id : {}, rating : {}", id, rating);
 
-        Restaurant restaurant =  repository.findById(id)
+        Restaurant restaurant = repository.findById(id)
                 .orElseThrow(() -> new RestaurantNotFoundException(id));
 
         Rating newRating = new Rating();
@@ -88,7 +89,7 @@ public class RestaurantController {
         log.info("new restaurant name : {}", name);
 
         for (Restaurant restList : repository.findAll()) {
-            if (name.equals(restList.getName())){
+            if (name.equals(restList.getName())) {
                 throw new RestaurantAlreadyExistsException(name);
             }
         }
@@ -121,7 +122,7 @@ public class RestaurantController {
     void addPrice(@PathVariable Long id, @PathVariable Price price) {
         log.info("id : {}, price : {}", id, price);
 
-        Restaurant restaurant =  repository.findById(id)
+        Restaurant restaurant = repository.findById(id)
                 .orElseThrow(() -> new RestaurantNotFoundException(id));
 
         restaurant.setPrice(price);
@@ -140,12 +141,11 @@ public class RestaurantController {
         List<Restaurant> priceList = new ArrayList<>();
 
         for (Restaurant restaurant : repository.findAll()) {
-            if (restaurant.getPrice().equals(price.toString())){
+            if (restaurant.getPrice().equals(price.toString())) {
                 priceList.add(restaurant);
             }
         }
 
         return priceList;
     }
-
 }
